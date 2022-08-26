@@ -13,11 +13,11 @@ cloudinary.config({
   api_secret: CLOUDINARY_API_SECRET,
 })
 
-const uploadmedia = async function(file){
-    const extname = path.extname(file.originalname).toString()
-    const base64 = parser.format(extname,file.buffer)
-    const fileUpload = await cloudinary.uploader.upload(base64.content)
-    return fileUpload
+async function uploadmedia(file){
+  const extname = path.extname(file.originalname).toString()
+  const base64 = parser.format(extname,file.buffer)
+  const fileUpload = await cloudinary.uploader.upload(base64.content)
+  return fileUpload
 }
 
 module.exports = {uploadmedia}

@@ -12,6 +12,7 @@ const courseSchema = new mongoose.Schema({
         required:true
     },
     field:{
+        type:String,
         enum:['stem','arts','humanities','social sciences','health sciences','skills'],
         required:true
     }

@@ -6,6 +6,7 @@ const createUnit = async(req,res,next) =>{
     try{
         const {name,text,course} = req.body
         if(!name || !text || !course) throw new BadRequest('Please provide all info')
+        console.log(req.file)
         const unit = {
             name:name,
             tutorial: (await uploadmedia(req.file)).url,

@@ -25,6 +25,8 @@ app.use(session({
 }))
 
 app.use('/users',require('./routes/users'))
+app.use('/courses',require('./routes/courses'))
+app.use('/units',require('./routes/units'))
 
 connectToMongo()
 
