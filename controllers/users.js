@@ -32,6 +32,7 @@ const login = async(req,res,next) =>{
 
         let session = {
             id:user._id,
+            role:user.role,
             email:user.email
         }
 

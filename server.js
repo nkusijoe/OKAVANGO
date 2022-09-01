@@ -20,8 +20,7 @@ app.use(session({
     saveUninitialized:false,
     resave:false,
     secret:SESSION_SECRET,
-    rolling:true,
-    cookie:{httpOnly:true,maxAge:1000*60*60}
+    cookie:{httpOnly:true}
 }))
 
 app.use('/users',require('./routes/users'))

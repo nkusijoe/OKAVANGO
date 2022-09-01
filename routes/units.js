@@ -1,11 +1,14 @@
 const {Router} = require('express')
-const { createUnit } = require('../controllers/units')
+const { createUnit,getAllUnits,getUnitById,deleteUnit,updateUnit } = require('../controllers/units')
 const { checkAuth } = require('../middleware/auth')
-const fileUpload = require('../utils/multer')
 
 const router = Router()
 
 router.use(checkAuth)
-router.post('/',fileUpload.single('video'),createUnit)
+router.post('/',createUnit)
+router.get('/',getAllUnits)
+router.get('/:id',getUnitById)
+router.put('/:id',updateUnit)
+router.delete('/:id',deleteUnit)
 
 module.exports = router
