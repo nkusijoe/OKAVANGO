@@ -1,5 +1,6 @@
 const {BadRequest} = require('http-errors')
 const Units = require('../models/units')
+<<<<<<< HEAD
 
 const createUnit = async(req,res,next) =>{
     try{
@@ -9,6 +10,19 @@ const createUnit = async(req,res,next) =>{
             name:name,
             tutorial:tutorialUrl,
             text:text,
+=======
+const { uploadmedia } = require('../utils/cloudinary')
+
+const createUnit = async(req,res,next) =>{
+    try{
+        const {name,text,course} = req.body
+        if(!name || !text || !course) throw new BadRequest('Please provide all info')
+        console.log(req.file)
+        const unit = {
+            name:name,
+            tutorial: (await uploadmedia(req.file)).url,
+            test:text,
+>>>>>>> 62f7a1dc35c341f03e3a46d1e56668d3fdc92957
             course:course
         }
         const newUnit = await Units.create(unit)
@@ -18,6 +32,7 @@ const createUnit = async(req,res,next) =>{
     }
 }
 
+<<<<<<< HEAD
 const deleteUnit = async(req,res,next) =>{
     try{
         if(!req.params.id) throw BadRequest('No id provided')
@@ -61,3 +76,6 @@ const getAllUnits = async(req,res,next) =>{
 }
 
 module.exports = {createUnit,deleteUnit,updateUnit,getUnitById,getAllUnits}
+=======
+module.exports = {createUnit}
+>>>>>>> 62f7a1dc35c341f03e3a46d1e56668d3fdc92957
