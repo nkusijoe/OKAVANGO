@@ -1,7 +1,8 @@
 const { BadRequest } = require('http-errors')
+const asyncHandler = require('../middleware/async')
 const Courses = require('../models/courses')
 
-const createCourse = async (req,res,next) => {
+const createCourse = asyncHandler( async (req,res,next) => {
     try{
         const {name,description,field} = req.body
         if(!name || !description || !field) throw new BadRequest('Please provide all info')
@@ -11,18 +12,18 @@ const createCourse = async (req,res,next) => {
     }catch(err){
         next(err)
     }
-}
+})
 
-const getAllCourses = async (req,res,next) => {
+const getAllCourses = asyncHandler( async (req,res,next) => {
     try{
         const courses = await Courses.find()
         res.json({success:true,data:courses})
     }catch(err){
         next(err)
     }
-}
+})
 
-const getCourseById = async (req,res,next) => {
+const getCourseById = asyncHandler( async (req,res,next) => {
     try{
         if(!req.params.id) throw new BadRequest('Please provide a courseId')
 
@@ -31,9 +32,9 @@ const getCourseById = async (req,res,next) => {
     }catch(err){
         next(err)
     }
-}
+})
 
-const getCourseByName = async (req,res,next) => {
+const getCourseByName = asyncHandler( async (req,res,next) => {
     try{
         if(!req.params.name) throw new BadRequest('Please provide a course name')
 
@@ -42,9 +43,9 @@ const getCourseByName = async (req,res,next) => {
     }catch(err){
         next(err)
     }
-}
+})
 
-const updateCourse = async (req,res,next) => {
+const updateCourse = asyncHandler( async (req,res,next) => {
     try{
         if(!req.params.id) throw new BadRequest('Please provide a courseId')
         const course = await Courses.findByIdAndUpdate(req.params.id,req.body,{new:true})
@@ -52,9 +53,9 @@ const updateCourse = async (req,res,next) => {
     }catch(err){
         next(err)
     }
-}
+})
 
-const deleteCourse = async (req,res,next) => {
+const deleteCourse = asyncHandler( async (req,res,next) => {
     try{
         if(!req.params.id) throw new BadRequest('Please provide a courseId')
 
@@ -63,6 +64,6 @@ const deleteCourse = async (req,res,next) => {
     }catch(err){
         next(err)
     }
-}
+})
 
 module.exports = {createCourse,getAllCourses,getCourseById,getCourseByName,updateCourse,deleteCourse}
